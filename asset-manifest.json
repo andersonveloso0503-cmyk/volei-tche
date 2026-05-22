@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/volei-tche/static/css/main.15fe448e.css",
+    "main.css": "/volei-tche/static/css/main.dff9d746.css",
     "main.js": "/volei-tche/static/js/main.28b699e5.js",
     "static/js/453.d51b232c.chunk.js": "/volei-tche/static/js/453.d51b232c.chunk.js",
     "index.html": "/volei-tche/index.html",
-    "main.15fe448e.css.map": "/volei-tche/static/css/main.15fe448e.css.map",
+    "main.dff9d746.css.map": "/volei-tche/static/css/main.dff9d746.css.map",
     "main.28b699e5.js.map": "/volei-tche/static/js/main.28b699e5.js.map",
     "453.d51b232c.chunk.js.map": "/volei-tche/static/js/453.d51b232c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.15fe448e.css",
+    "static/css/main.dff9d746.css",
     "static/js/main.28b699e5.js"
   ]
 }
