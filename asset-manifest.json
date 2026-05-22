@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/volei-tche/static/css/main.15fe448e.css",
+    "main.js": "/volei-tche/static/js/main.28b699e5.js",
+    "static/js/453.d51b232c.chunk.js": "/volei-tche/static/js/453.d51b232c.chunk.js",
+    "index.html": "/volei-tche/index.html",
+    "main.15fe448e.css.map": "/volei-tche/static/css/main.15fe448e.css.map",
+    "main.28b699e5.js.map": "/volei-tche/static/js/main.28b699e5.js.map",
+    "453.d51b232c.chunk.js.map": "/volei-tche/static/js/453.d51b232c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.15fe448e.css",
+    "static/js/main.28b699e5.js"
+  ]
+}
