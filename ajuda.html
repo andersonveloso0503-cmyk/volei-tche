@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volei Tche - Guia Completo</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #f5f5f5; color: #333; }
+
+/* HEADER */
+.header { background: #0e1e12; padding: 20px 16px; text-align: center; }
+.header img { width: 70px; height: 70px; border-radius: 50%; border: 2px solid #c9a84c; margin-bottom: 10px; }
+.header h1 { color: #c9a84c; font-size: 22px; }
+.header p { color: rgba(201,168,76,0.6); font-size: 13px; margin-top: 4px; }
+
+/* MENU */
+.menu { background: #0e1e12; padding: 0 16px 16px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.menu a { color: #c9a84c; font-size: 12px; padding: 6px 12px; border: 1px solid rgba(201,168,76,0.3); border-radius: 99px; text-decoration: none; white-space: nowrap; }
+.menu a:hover { background: rgba(201,168,76,0.1); }
+
+/* SECOES */
+.secao { padding: 20px 16px; max-width: 600px; margin: 0 auto; }
+.secao-titulo { font-size: 20px; font-weight: bold; color: #0e1e12; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+.secao-sub { font-size: 13px; color: #666; margin-bottom: 20px; }
+.secao-divider { border: none; border-top: 2px solid #0e1e12; margin: 4px 0 20px; width: 40px; }
+
+/* PASSOS */
+.passo { background: #fff; border-radius: 14px; padding: 16px; margin-bottom: 12px; border: 0.5px solid #ddd; display: flex; gap: 14px; align-items: flex-start; }
+.passo-num { width: 32px; height: 32px; border-radius: 50%; background: #0e1e12; color: #c9a84c; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; flex-shrink: 0; }
+.passo-txt h3 { font-size: 15px; color: #0e1e12; margin-bottom: 4px; }
+.passo-txt p { font-size: 13px; color: #555; line-height: 1.5; }
+.passo-txt .dica { margin-top: 8px; background: #EAF3DE; border-radius: 8px; padding: 8px 10px; font-size: 12px; color: #27500A; }
+.passo-txt .atencao { margin-top: 8px; background: #FAEEDA; border-radius: 8px; padding: 8px 10px; font-size: 12px; color: #633806; }
+
+/* MOCKUP TELA */
+.mockup { background: #0e1e12; border-radius: 16px; padding: 14px; margin: 12px 0; }
+.mockup-hdr { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.mockup-logo { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid #c9a84c; background: #1a3a1a; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.mockup-titulo { color: #c9a84c; font-size: 14px; font-weight: 500; }
+.mockup-sub { color: rgba(201,168,76,0.5); font-size: 11px; }
+.mockup-btn { width: 100%; padding: 12px; border-radius: 10px; border: none; font-size: 14px; font-weight: 500; margin-bottom: 8px; cursor: pointer; text-align: center; }
+.mockup-btn.gold { background: #c9a84c; color: #0e1e12; }
+.mockup-btn.dark { background: #1a3a1a; color: #c9a84c; }
+.mockup-btn.outline { background: transparent; color: #c9a84c; border: 1px solid rgba(201,168,76,0.3); }
+.mockup-btn.green { background: #25D366; color: #fff; }
+
+/* BOTAO VOLTAR AO TOPO */
+.topo { position: fixed; bottom: 20px; right: 20px; background: #0e1e12; color: #c9a84c; border: none; border-radius: 50%; width: 44px; height: 44px; font-size: 18px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+
+/* BADGES */
+.badge { display: inline-block; padding: 3px 10px; border-radius: 99px; font-size: 11px; font-weight: 500; margin-left: 8px; }
+.badge.jogador { background: #EAF3DE; color: #27500A; }
+.badge.coord { background: #FAEEDA; color: #633806; }
+.badge.todos { background: #E6F1FB; color: #0C447C; }
+
+/* SEPARADOR */
+.sep { background: #0e1e12; height: 4px; margin: 8px 0; }
+
+/* CARD RESUMO */
+.resumo-card { background: #0e1e12; border-radius: 14px; padding: 16px; margin-bottom: 20px; }
+.resumo-card h3 { color: #c9a84c; font-size: 16px; margin-bottom: 12px; }
+.resumo-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.resumo-icon { font-size: 20px; flex-shrink: 0; width: 30px; text-align: center; }
+.resumo-txt strong { color: #c9a84c; font-size: 13px; display: block; }
+.resumo-txt span { color: rgba(201,168,76,0.6); font-size: 12px; }
+
+/* FLUXO */
+.fluxo { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin: 10px 0; }
+.fluxo-item { background: #0e1e12; color: #c9a84c; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 500; }
+.fluxo-seta { color: #c9a84c; font-size: 16px; }
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div style="font-size:50px;margin-bottom:10px;">🏐</div>
+  <h1>Volei Tche</h1>
+  <p>Guia completo de funcionalidades</p>
+</div>
+
+<!-- MENU RAPIDO -->
+<div class="menu">
+  <a href="#home">Tela Inicial</a>
+  <a href="#jogador">Minha Area</a>
+  <a href="#perfil">Perfil</a>
+  <a href="#confirmar">Confirmar Presenca</a>
+  <a href="#agenda">Agenda</a>
+  <a href="#desafio">Desafiar</a>
+  <a href="#coordenador">Coordenador</a>
+  <a href="#criar-jogo">Criar Jogo</a>
+  <a href="#convocar">Convocar</a>
+  <a href="#placar">Placar</a>
+  <a href="#pagamentos">Pagamentos</a>
+  <a href="#instalar">Instalar App</a>
+</div>
+
+<!-- VISAO GERAL -->
+<div class="secao">
+  <div class="resumo-card">
+    <h3>O que voce pode fazer no app?</h3>
+    <div class="resumo-item">
+      <div class="resumo-icon">🏐</div>
+      <div class="resumo-txt"><strong>Jogadores</strong><span>Confirmar presenca, ver jogos, acessar perfil</span></div>
+    </div>
+    <div class="resumo-item">
+      <div class="resumo-icon">📋</div>
+      <div class="resumo-txt"><strong>Coordenador</strong><span>Criar jogos, convocar, registrar placar e pagamentos</span></div>
+    </div>
+    <div class="resumo-item">
+      <div class="resumo-icon">🆚</div>
+      <div class="resumo-txt"><strong>Adversarios</strong><span>Desafiar o Volei Tche para um jogo</span></div>
+    </div>
+    <div class="resumo-item">
+      <div class="resumo-icon">📊</div>
+      <div class="resumo-txt"><strong>Agenda Publica</strong><span>Ver proximos jogos e resultados sem login</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- TELA INICIAL -->
+<div class="secao" id="home">
+  <div class="secao-titulo">🏠 Tela Inicial <span class="badge todos">Todos</span></div>
+  <hr class="secao-divider">
+  <p class="secao-sub">Primeira tela que aparece ao abrir o app. Mostra as estatisticas do time e o proximo jogo.</p>
+
+  <div class="passo">
+    <div class="passo-num">1</div>
+    <div class="passo-txt">
+      <h3>Estatisticas do time</h3>
+      <p>No topo aparecem o total de jogos, vitorias e aproveitamento do Volei Tche — atualizados automaticamente.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">2</div>
+    <div class="passo-txt">
+      <h3>Proximo Jogo</h3>
+      <p>Card mostrando o proximo jogo agendado com logos dos times, data, hora, local e quantos jogadores ja confirmaram presenca.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">3</div>
+    <div class="passo-txt">
+      <h3>Botoes principais</h3>
+      <p><strong>Quero marcar um jogo!</strong> — Formulario para adversarios desafiarem o time<br><br>
+      <strong>Ver agenda e jogos</strong> — Proximos jogos, resultados e estatisticas<br><br>
+      <strong>Minha area (jogador)</strong> — Area do jogador com seus jogos<br><br>
+      <strong>Area do coordenador</strong> — Acesso restrito ao coordenador</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">4</div>
+    <div class="passo-txt">
+      <h3>Modo escuro</h3>
+      <p>Botao para alternar entre tema claro e escuro. O app lembra sua preferencia.</p>
+      <div class="dica">Dica: o modo escuro e otimo para usar a noite e economiza bateria!</div>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- MINHA AREA -->
+<div class="secao" id="jogador">
+  <div class="secao-titulo">👤 Minha Area <span class="badge jogador">Jogador</span></div>
+  <hr class="secao-divider">
+  <p class="secao-sub">Espaco do jogador para ver seus jogos e confirmar presenca. Nao precisa de senha!</p>
+
+  <div class="fluxo">
+    <div class="fluxo-item">Tela Inicial</div>
+    <div class="fluxo-seta">→</div>
+    <div class="fluxo-item">Minha area</div>
+    <div class="fluxo-seta">→</div>
+    <div class="fluxo-item">Selecionar nome</div>
+    <div class="fluxo-seta">→</div>
+    <div class="fluxo-item">Entrar</div>
+  </div>
+
+  <div class="passo">
+    <div class="passo-num">1</div>
+    <div class="passo-txt">
+      <h3>Selecionar seu nome</h3>
+      <p>Toque em <strong>"Minha area (jogador)"</strong> na home. Selecione seu nome na lista e toque em <strong>"Entrar"</strong>.</p>
+      <div class="dica">O app lembra seu nome nas proximas visitas automaticamente!</div>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">2</div>
+    <div class="passo-txt">
+      <h3>Suas estatisticas</h3>
+      <p>Aparecem 4 numeros: total de jogos convocados, presenças confirmadas, vitorias e aproveitamento em %.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">3</div>
+    <div class="passo-txt">
+      <h3>Proximos Jogos</h3>
+      <p>Lista de jogos agendados. Para cada jogo voce ve data, hora, local e seu status atual (Confirmado / Nao vai / Pendente). Voce pode confirmar ou cancelar diretamente aqui.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">4</div>
+    <div class="passo-txt">
+      <h3>Historico</h3>
+      <p>Todos os jogos passados com resultado (Vitoria/Derrota) e se voce foi ou nao ao jogo.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">5</div>
+    <div class="passo-txt">
+      <h3>Acessar seu perfil</h3>
+      <p>Na tela de selecao de nome, apos escolher seu nome aparece um botao <strong>"Acessar perfil de [Nome]"</strong> — toque para ver e editar seu perfil.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- CONFIRMAR PRESENCA -->
+<div class="secao" id="confirmar">
+  <div class="secao-titulo">✅ Confirmar Presenca <span class="badge todos">Todos</span></div>
+  <hr class="secao-divider">
+  <p class="secao-sub">Como confirmar presenca quando o coordenador enviar o link de convocacao no WhatsApp.</p>
+
+  <div class="fluxo">
+    <div class="fluxo-item">Link no WhatsApp</div>
+    <div class="fluxo-seta">→</div>
+    <div class="fluxo-item">Clica no link</div>
+    <div class="fluxo-seta">→</div>
+    <div class="fluxo-item">Bora la! ou Nao</div>
+    <div class="fluxo-seta">→</div>
+    <div class="fluxo-item">Seleciona nome</div>
+  </div>
+
+  <div class="passo">
+    <div class="passo-num">1</div>
+    <div class="passo-txt">
+      <h3>Clique no link</h3>
+      <p>O coordenador envia um link no grupo do WhatsApp. Qualquer pessoa do grupo pode clicar — nao precisa ter o app instalado!</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">2</div>
+    <div class="passo-txt">
+      <h3>Veja os detalhes do jogo</h3>
+      <p>Aparece um card com os logos dos dois times, data, hora, local e modalidade do jogo.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">3</div>
+    <div class="passo-txt">
+      <h3>Toque em "Bora la!" ou "Nao poderei ir"</h3>
+      <p>Escolha sua resposta. Apos tocar aparece uma lista dos jogadores convocados.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">4</div>
+    <div class="passo-txt">
+      <h3>Selecione seu nome</h3>
+      <p>Escolha seu nome na lista. Se voce nao estiver na lista, use o campo <strong>"Seu nome (convidado)"</strong> e toque em <strong>"Confirmar como convidado"</strong>.</p>
+      <div class="dica">Convidados sao adicionados automaticamente a lista do jogo!</div>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">5</div>
+    <div class="passo-txt">
+      <h3>Adicionar no Google Agenda (opcional)</h3>
+      <p>Apos confirmar SIM aparece um botao azul para adicionar o jogo no seu Google Agenda automaticamente.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- PERFIL -->
+<div class="secao" id="perfil">
+  <div class="secao-titulo">🎽 Perfil do Jogador <span class="badge jogador">Jogador</span></div>
+  <hr class="secao-divider">
+  <p class="secao-sub">Cada jogador tem um perfil com foto, estatisticas e informacoes de contato.</p>
+
+  <div class="fluxo">
+    <div class="fluxo-item">Minha area</div>
+    <div class="fluxo-seta">→</div>
+    <div class="fluxo-item">Selecionar nome</div>
+    <div class="fluxo-seta">→</div>
+    <div class="fluxo-item">Acessar perfil</div>
+    <div class="fluxo-seta">→</div>
+    <div class="fluxo-item">PIN 4 digitos</div>
+  </div>
+
+  <div class="passo">
+    <div class="passo-num">1</div>
+    <div class="passo-txt">
+      <h3>Como acessar</h3>
+      <p>Va em <strong>Minha area → selecione seu nome → "Acessar perfil de [Nome]"</strong>. Voce tambem pode acessar o perfil de outros jogadores pela Agenda Publica.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">2</div>
+    <div class="passo-txt">
+      <h3>PIN de seguranca</h3>
+      <p>Para editar seu perfil e necessario um PIN de 4 digitos. Na primeira vez voce cria o PIN. Nas proximas visitas voce confirma o PIN criado.</p>
+      <div class="atencao">Nao esqueca seu PIN! Nao e possivel recupera-lo.</div>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">3</div>
+    <div class="passo-txt">
+      <h3>O que voce pode adicionar</h3>
+      <p>
+        📸 <strong>Foto de perfil</strong> — aparece em todo o app<br><br>
+        🟢 <strong>Status</strong> — Pronto / Em recuperacao / De ferias / Indisponivel<br><br>
+        🔢 <strong>Numero da camisa</strong><br><br>
+        🏐 <strong>Posicoes favoritas</strong> — multipla escolha<br><br>
+        💬 <strong>Bio</strong> — frase sobre voce<br><br>
+        📱 <strong>WhatsApp</strong> — obrigatorio para receber lembretes<br><br>
+        📷 <strong>Instagram</strong>
+      </p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">4</div>
+    <div class="passo-txt">
+      <h3>Estatisticas do perfil</h3>
+      <p>Aparecem automaticamente: jogos convocados, presenças, vitorias e aproveitamento em %.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- AGENDA PUBLICA -->
+<div class="secao" id="agenda">
+  <div class="secao-titulo">📅 Agenda Publica <span class="badge todos">Todos</span></div>
+  <hr class="secao-divider">
+  <p class="secao-sub">Veja proximos jogos, resultados e estatisticas sem precisar de login.</p>
+
+  <div class="passo">
+    <div class="passo-num">1</div>
+    <div class="passo-txt">
+      <h3>Proximos jogos</h3>
+      <p>Calendario com pontinhos nos dias que tem jogo. Toque em um jogo para ver o elenco convocado com status de confirmacao de cada jogador.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">2</div>
+    <div class="passo-txt">
+      <h3>Resultados</h3>
+      <p>Todos os jogos passados com placar, sets e resultado (Vitoria/Derrota). Se o coordenador adicionou foto do jogo ela aparece aqui.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">3</div>
+    <div class="passo-txt">
+      <h3>Estatisticas</h3>
+      <p>Resumo geral do time: total de jogos, vitorias, derrotas e aproveitamento em %.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">4</div>
+    <div class="passo-txt">
+      <h3>Ver perfil de jogador</h3>
+      <p>Na lista do elenco de cada jogo, toque no botao <strong>"Perfil"</strong> ao lado do nome do jogador para ver o perfil completo dele.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- DESAFIO -->
+<div class="secao" id="desafio">
+  <div class="secao-titulo">🆚 Desafiar o Volei Tche <span class="badge todos">Adversarios</span></div>
+  <hr class="secao-divider">
+  <p class="secao-sub">Time adversario pode solicitar um jogo diretamente pelo app. Nao precisa ter o app instalado!</p>
+
+  <div class="fluxo">
+    <div class="fluxo-item">Home</div>
+    <div class="fluxo-seta">→</div>
+    <div class="fluxo-item">Quero marcar um jogo!</div>
+    <div class="fluxo-seta">→</div>
+    <div class="fluxo-item">Preencher dados</div>
+    <div class="fluxo-seta">→</div>
+    <div class="fluxo-item">Coordenador recebe no WA</div>
+  </div>
+
+  <div class="passo">
+    <div class="passo-num">1</div>
+    <div class="passo-txt">
+      <h3>Dados do time</h3>
+      <p>Preencha o nome do seu time, seu nome (responsavel) e numero de WhatsApp para contato.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">2</div>
+    <div class="passo-txt">
+      <h3>Escolha a modalidade</h3>
+      <p>Selecione: Quarteto Masculino, Feminino, Misto, Dupla Masculina, Dupla Feminina ou Resenha.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">3</div>
+    <div class="passo-txt">
+      <h3>Escolha uma data</h3>
+      <p>Calendario mostra apenas datas disponiveis. Dias com jogos ja marcados e datas fixas do time aparecem bloqueados automaticamente.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">4</div>
+    <div class="passo-txt">
+      <h3>Coordenador recebe o desafio</h3>
+      <p>O coordenador recebe uma mensagem no WhatsApp com todos os dados. Ele pode aceitar ou recusar pelo painel — voce recebe a resposta no seu WhatsApp.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- COORDENADOR -->
+<div class="secao" id="coordenador">
+  <div class="secao-titulo">🔐 Area do Coordenador <span class="badge coord">Coordenador</span></div>
+  <hr class="secao-divider">
+  <p class="secao-sub">Acesso restrito. So o coordenador tem a senha de acesso.</p>
+
+  <div class="passo">
+    <div class="passo-num">1</div>
+    <div class="passo-txt">
+      <h3>Como entrar</h3>
+      <p>Na tela inicial toque em <strong>"Area do coordenador"</strong>. Digite o email e senha cadastrados no Firebase.</p>
+      <div class="dica">Email: coordenador@voleitche.com</div>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">2</div>
+    <div class="passo-txt">
+      <h3>Painel principal</h3>
+      <p>Apos o login aparece o painel com as modalidades para criar jogos, e botoes para acessar: Jogos criados, Desafios, Pagamentos, Elenco, Estatisticas e Datas fixas.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">3</div>
+    <div class="passo-txt">
+      <h3>Sair</h3>
+      <p>Toque no botao <strong>"Sair"</strong> no canto superior direito. O app faz logout automaticamente.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- CRIAR JOGO -->
+<div class="secao" id="criar-jogo">
+  <div class="secao-titulo">➕ Criar um Jogo <span class="badge coord">Coordenador</span></div>
+  <hr class="secao-divider">
+  <p class="secao-sub">Como criar um novo jogo no painel do coordenador.</p>
+
+  <div class="fluxo">
+    <div class="fluxo-item">Painel</div>
+    <div class="fluxo-seta">→</div>
+    <div class="fluxo-item">Escolher modalidade</div>
+    <div class="fluxo-seta">→</div>
+    <div class="fluxo-item">Preencher dados</div>
+    <div class="fluxo-seta">→</div>
+    <div class="fluxo-item">Criar jogo</div>
+  </div>
+
+  <div class="passo">
+    <div class="passo-num">1</div>
+    <div class="passo-txt">
+      <h3>Escolha a modalidade</h3>
+      <p>Toque em uma das modalidades: Quarteto Masculino, Feminino, Misto, Dupla Masculina, Dupla Feminina ou Resenha (roxa).</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">2</div>
+    <div class="passo-txt">
+      <h3>Preencha os dados</h3>
+      <p>
+        📅 <strong>Data e horario</strong> — obrigatorios<br><br>
+        📍 <strong>Local</strong> — nome da quadra<br><br>
+        🆚 <strong>Adversario</strong> — nome do time adversario<br><br>
+        🖼️ <strong>Logo do adversario</strong> — foto opcional (aparece na home)<br><br>
+        💬 <strong>Recado</strong> — mensagem opcional para os jogadores
+      </p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">3</div>
+    <div class="passo-txt">
+      <h3>Selecione os jogadores</h3>
+      <p>O elenco ja aparece pre-selecionado. Toque em um jogador para deselecionar. Use o campo <strong>"Adicionar convidado"</strong> para incluir alguem de fora do elenco.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">4</div>
+    <div class="passo-txt">
+      <h3>Toque em "Criar jogo e ir para convocacao"</h3>
+      <p>O jogo e criado e voce vai direto para a tela de convocacao com o link pronto para enviar.</p>
+      <div class="atencao">Se der erro: tente sem o logo do adversario. Imagens muito grandes podem causar problemas.</div>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- CONVOCAR -->
+<div class="secao" id="convocar">
+  <div class="secao-titulo">📲 Convocar Jogadores <span class="badge coord">Coordenador</span></div>
+  <hr class="secao-divider">
+  <p class="secao-sub">Como enviar a convocacao para o grupo do WhatsApp.</p>
+
+  <div class="passo">
+    <div class="passo-num">1</div>
+    <div class="passo-txt">
+      <h3>Link de convocacao</h3>
+      <p>Apos criar o jogo aparece um link unico. Todos os jogadores usam o mesmo link — cada um se identifica ao abrir.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">2</div>
+    <div class="passo-txt">
+      <h3>Enviar para o grupo</h3>
+      <p>Toque em <strong>"Enviar lista para o grupo do WhatsApp"</strong> — abre o WhatsApp com a mensagem pronta contendo data, hora, local, adversario e o link de confirmacao.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">3</div>
+    <div class="passo-txt">
+      <h3>Copiar mensagem individual</h3>
+      <p>Use o botao <strong>"Copiar msg"</strong> ao lado de cada jogador para copiar uma mensagem personalizada para enviar no privado.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">4</div>
+    <div class="passo-txt">
+      <h3>Acompanhar confirmacoes</h3>
+      <p>Va em <strong>"Ver jogos criados"</strong> e veja em tempo real quem confirmou (verde), quem nao vai (vermelho) e quem esta pendente (amarelo). Atualiza automaticamente a cada 30 segundos!</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">5</div>
+    <div class="passo-txt">
+      <h3>Enviar lista de confirmados</h3>
+      <p>No card de cada jogo toque em <strong>"Enviar lista de confirmados para o grupo"</strong> — abre o WhatsApp com a lista dividida em: BORA JOGAR ✅, NAO VAO ❌ e PENDENTES ⏳.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">6</div>
+    <div class="passo-txt">
+      <h3>Adicionar convidado apos criar o jogo</h3>
+      <p>No card do jogo em <strong>"Ver jogos criados"</strong>, use o campo <strong>"+ Adicionar convidado..."</strong> acima da lista de jogadores. Digite o nome e toque no <strong>"+"</strong>.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">7</div>
+    <div class="passo-txt">
+      <h3>Enviar lembrete no dia do jogo</h3>
+      <p>Toque em <strong>"Enviar lembrete pelo WhatsApp"</strong> — abre o WhatsApp de cada jogador confirmado que tiver numero cadastrado no perfil, com a mensagem de lembrete do jogo.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- PLACAR -->
+<div class="secao" id="placar">
+  <div class="secao-titulo">🏆 Registrar Placar <span class="badge coord">Coordenador</span></div>
+  <hr class="secao-divider">
+  <p class="secao-sub">Como registrar o resultado de um jogo apos a partida.</p>
+
+  <div class="passo">
+    <div class="passo-num">1</div>
+    <div class="passo-txt">
+      <h3>Abrir o modal de placar</h3>
+      <p>Em <strong>"Ver jogos criados"</strong>, toque no botao <strong>"+ Placar"</strong> (ou <strong>"Editar placar"</strong> se ja tiver resultado) no card do jogo.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">2</div>
+    <div class="passo-txt">
+      <h3>Nome do adversario</h3>
+      <p>Confirme ou digite o nome do time adversario.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">3</div>
+    <div class="passo-txt">
+      <h3>Registrar os sets</h3>
+      <p>Comeca com 1 set. Toque em <strong>"+ Set"</strong> para adicionar mais (maximo 3 sets). Para cada set, digite os pontos do Volei Tche e do adversario. O resultado aparece automaticamente em tempo real.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">4</div>
+    <div class="passo-txt">
+      <h3>Adicionar foto do jogo (opcional)</h3>
+      <p>Toque em <strong>"Adicionar foto do jogo"</strong> para tirar uma foto ou escolher da galeria. A foto aparece nos resultados publicos da agenda.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">5</div>
+    <div class="passo-txt">
+      <h3>Salvar</h3>
+      <p>Toque em <strong>"Salvar"</strong>. O resultado aparece na agenda publica, nas estatisticas do time e nas estatisticas de cada jogador.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- PAGAMENTOS -->
+<div class="secao" id="pagamentos">
+  <div class="secao-titulo">💰 Pagamentos <span class="badge coord">Coordenador</span></div>
+  <hr class="secao-divider">
+  <p class="secao-sub">Controle de quem pagou a mensalidade ou cota do jogo.</p>
+
+  <div class="passo">
+    <div class="passo-num">1</div>
+    <div class="passo-txt">
+      <h3>Acessar</h3>
+      <p>No painel toque em <strong>"Resumo de pagamentos"</strong>.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">2</div>
+    <div class="passo-txt">
+      <h3>Marcar como pago</h3>
+      <p>Para cada jogo aparece a lista de jogadores. Toque no botao <strong>"Pagar"</strong> ao lado do nome para marcar como pago — o botao fica verde com <strong>"Pago"</strong>. Toque novamente para desmarcar.</p>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">3</div>
+    <div class="passo-txt">
+      <h3>Enviar lista no WhatsApp</h3>
+      <p>Toque no botao verde <strong>"Enviar lista de pagamentos no WhatsApp"</strong> — abre o WhatsApp com a lista de quem pagou e quem esta pendente.</p>
+      <div class="dica">A mensagem e formatada automaticamente com emojis ✅ e ❌.</div>
+    </div>
+  </div>
+</div>
+
+<div class="sep"></div>
+
+<!-- INSTALAR -->
+<div class="secao" id="instalar">
+  <div class="secao-titulo">📱 Instalar o App <span class="badge todos">Todos</span></div>
+  <hr class="secao-divider">
+  <p class="secao-sub">Como instalar o app do Volei Tche na tela inicial do celular. Funciona sem precisar da App Store!</p>
+
+  <div class="passo">
+    <div class="passo-num">1</div>
+    <div class="passo-txt">
+      <h3>No iPhone (iOS)</h3>
+      <p>1. Abra o link do app no Safari<br>
+      2. Toque no botao de compartilhar (quadrado com seta para cima)<br>
+      3. Role para baixo e toque em <strong>"Adicionar a Tela de Inicio"</strong><br>
+      4. Toque em <strong>"Adicionar"</strong> no canto superior direito</p>
+      <div class="atencao">Deve ser feito no Safari, nao funciona no Chrome do iPhone.</div>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">2</div>
+    <div class="passo-txt">
+      <h3>No Android</h3>
+      <p>1. Abra o link do app no Chrome<br>
+      2. Toque nos 3 pontinhos no canto superior direito<br>
+      3. Toque em <strong>"Adicionar a tela inicial"</strong><br>
+      4. Toque em <strong>"Adicionar"</strong></p>
+      <div class="dica">No Android tambem pode aparecer um banner automatico perguntando se quer instalar!</div>
+    </div>
+  </div>
+  <div class="passo">
+    <div class="passo-num">3</div>
+    <div class="passo-txt">
+      <h3>Vantagens de instalar</h3>
+      <p>✅ Abre mais rapido<br>
+      ✅ Funciona sem digitar o link<br>
+      ✅ Aparece na tela inicial como qualquer app<br>
+      ✅ No Android: recebe notificacoes push dos jogos</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="background:#0e1e12;padding:24px 16px;text-align:center;margin-top:20px;">
+  <div style="font-size:32px;margin-bottom:8px;">🏐</div>
+  <div style="color:#c9a84c;font-size:16px;font-weight:500;">Volei Tche</div>
+  <div style="color:rgba(201,168,76,0.5);font-size:12px;margin-top:4px;">Amigos e Resenha 2023</div>
+  <a href="https://andersonveloso0503-cmyk.github.io/volei-tche/" style="display:inline-block;margin-top:16px;padding:12px 24px;background:#c9a84c;color:#0e1e12;border-radius:10px;text-decoration:none;font-size:14px;font-weight:bold;">Abrir o App</a>
+</div>
+
+<button class="topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+</body>
+</html>
