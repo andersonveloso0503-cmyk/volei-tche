@@ -13,33 +13,42 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 
+const BASE_URL = 'https://andersonveloso0503-cmyk.github.io/volei-tche/';
+
 // Notificação recebida com app em BACKGROUND
 messaging.onBackgroundMessage((payload) => {
   console.log('[SW] Mensagem em background:', payload);
-  const { title, body, icon } = payload.notification || {};
+  const { title, body } = payload.notification || {};
+  const url = payload.fcmOptions?.link || payload.data?.url || BASE_URL;
+
   self.registration.showNotification(title || '🏐 Volei Tche', {
     body: body || 'Nova notificação',
-    icon: icon || '/volei-tche/logo192.png',
+    icon: '/volei-tche/logo192.png',
     badge: '/volei-tche/logo192.png',
-    data: payload.data || {},
-    actions: [
-      { action: 'abrir', title: 'Abrir app' },
-      { action: 'fechar', title: 'Fechar' }
-    ],
+    data: { url },
+    requireInteraction: true,
     vibrate: [200, 100, 200]
   });
 });
 
-// Clique na notificação → abre o app
+// Clique na notificação → abre direto na página correta
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-  if (event.action === 'fechar') return;
-  const url = event.notification.data?.url || 'https://andersonveloso0503-cmyk.github.io/volei-tche/';
+
+  const url = event.notification.data?.url || BASE_URL;
+  console.log('[SW] Clique na notificação, abrindo:', url);
+
   event.waitUntil(
     clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
-      const existing = list.find(c => c.url.includes('volei-tche'));
-      if (existing) { existing.focus(); existing.navigate(url); }
-      else clients.openWindow(url);
+      // Se o app já está aberto, navega para a URL correta
+      for (const client of list) {
+        if (client.url.includes('volei-tche') && 'navigate' in client) {
+          client.focus();
+          return client.navigate(url);
+        }
+      }
+      // Se não está aberto, abre uma nova janela com a URL correta
+      return clients.openWindow(url);
     })
   );
 });
