@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/volei-tche/static/css/main.32ca9119.css",
-    "main.js": "/volei-tche/static/js/main.a9ee5304.js",
+    "main.js": "/volei-tche/static/js/main.e1029a8d.js",
     "static/js/508.69e86c8e.chunk.js": "/volei-tche/static/js/508.69e86c8e.chunk.js",
     "static/js/453.d51b232c.chunk.js": "/volei-tche/static/js/453.d51b232c.chunk.js",
     "static/media/logo-volei-tche.png": "/volei-tche/static/media/logo-volei-tche.388403edcd693f19a442.png",
     "index.html": "/volei-tche/index.html",
     "main.32ca9119.css.map": "/volei-tche/static/css/main.32ca9119.css.map",
-    "main.a9ee5304.js.map": "/volei-tche/static/js/main.a9ee5304.js.map",
+    "main.e1029a8d.js.map": "/volei-tche/static/js/main.e1029a8d.js.map",
     "508.69e86c8e.chunk.js.map": "/volei-tche/static/js/508.69e86c8e.chunk.js.map",
     "453.d51b232c.chunk.js.map": "/volei-tche/static/js/453.d51b232c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.32ca9119.css",
-    "static/js/main.a9ee5304.js"
+    "static/js/main.e1029a8d.js"
   ]
 }
