@@ -45,6 +45,11 @@ messaging.onBackgroundMessage((payload) => {
   }
 
   self.registration.showNotification(title || '🏐 Volei Tche', options);
+
+  // Atualiza badge no ícone do app
+  if ('setAppBadge' in navigator) {
+    navigator.setAppBadge().catch(() => {});
+  }
 });
 
 // ── Clique na notificação ou nos botões ─────────────────────
@@ -55,6 +60,11 @@ self.addEventListener('notificationclick', (event) => {
   const action = event.action;
 
   console.log('[SW] Clique:', action, '| jogo:', jogoId, '| jogador:', nome);
+  
+  // Limpa o badge ao interagir com a notificação
+  if ('clearAppBadge' in navigator) {
+    navigator.clearAppBadge().catch(() => {});
+  }
 
   // Se clicou em "Bora lá!" ou "Não posso"
   if ((action === 'confirmar' || action === 'recusar') && jogoId && nome) {
