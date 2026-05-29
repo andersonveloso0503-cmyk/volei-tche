@@ -12,43 +12,93 @@ firebase.initializeApp({
 });
 
 const messaging = firebase.messaging();
-
 const BASE_URL = 'https://andersonveloso0503-cmyk.github.io/volei-tche/';
 
-// Notificação recebida com app em BACKGROUND
+// ── Notificação recebida em BACKGROUND ──────────────────────
 messaging.onBackgroundMessage((payload) => {
-  console.log('[SW] Mensagem em background:', payload);
-  const { title, body } = payload.notification || {};
-  const url = payload.fcmOptions?.link || payload.data?.url || BASE_URL;
+  console.log('[SW] Background message:', payload);
 
-  self.registration.showNotification(title || '🏐 Volei Tche', {
-    body: body || 'Nova notificação',
-    icon: '/volei-tche/logo192.png',
+  const { title, body } = payload.notification || {};
+  const url    = payload.fcmOptions?.link || payload.data?.url || BASE_URL;
+  const jogoId = payload.data?.jogoId || '';
+  const nome   = payload.data?.nome   || '';
+
+  // Se for notificação de convocação, adiciona botões de confirmação
+  const isConvocacao = jogoId && nome;
+
+  const options = {
+    body:  body || 'Nova notificação',
+    icon:  '/volei-tche/logo192.png',
     badge: '/volei-tche/logo192.png',
-    data: { url },
+    data:  { url, jogoId, nome },
     requireInteraction: true,
-    vibrate: [200, 100, 200]
-  });
+    vibrate: [200, 100, 200],
+    tag: jogoId || 'volei-tche',  // agrupa notificações do mesmo jogo
+  };
+
+  // Botões de ação (funciona no Android Chrome)
+  if (isConvocacao) {
+    options.actions = [
+      { action: 'confirmar', title: '✅ Bora lá!' },
+      { action: 'recusar',   title: '❌ Não posso' },
+    ];
+  }
+
+  self.registration.showNotification(title || '🏐 Volei Tche', options);
 });
 
-// Clique na notificação → abre direto na página correta
+// ── Clique na notificação ou nos botões ─────────────────────
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
 
-  const url = event.notification.data?.url || BASE_URL;
-  console.log('[SW] Clique na notificação, abrindo:', url);
+  const { url, jogoId, nome } = event.notification.data || {};
+  const action = event.action;
 
+  console.log('[SW] Clique:', action, '| jogo:', jogoId, '| jogador:', nome);
+
+  // Se clicou em "Bora lá!" ou "Não posso"
+  if ((action === 'confirmar' || action === 'recusar') && jogoId && nome) {
+    const resposta = action === 'confirmar' ? 'sim' : 'nao';
+
+    // Salva a confirmação no Firestore via fetch para Cloud Function
+    event.waitUntil(
+      fetch('https://us-east1-volei-tche.cloudfunctions.net/confirmarPresenca', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jogoId, nome, resposta }),
+      }).then(resp => {
+        console.log('[SW] Confirmação salva:', resposta, resp.status);
+        // Mostra notificação de feedback
+        return self.registration.showNotification(
+          action === 'confirmar' ? '✅ Presença confirmada!' : '❌ Ausência registrada',
+          {
+            body: action === 'confirmar'
+              ? `${nome}, te vemos em campo! 🏐`
+              : `${nome}, tudo bem! Até a próxima.`,
+            icon: '/volei-tche/logo192.png',
+            tag: 'feedback-' + jogoId,
+            requireInteraction: false,
+          }
+        );
+      }).catch(err => {
+        console.error('[SW] Erro ao confirmar:', err);
+        // Fallback: abre o app
+        return clients.openWindow(url || BASE_URL + '?jogo=' + jogoId);
+      })
+    );
+    return;
+  }
+
+  // Clique normal na notificação → abre o app
   event.waitUntil(
     clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
-      // Se o app já está aberto, navega para a URL correta
       for (const client of list) {
         if (client.url.includes('volei-tche') && 'navigate' in client) {
           client.focus();
-          return client.navigate(url);
+          return client.navigate(url || BASE_URL);
         }
       }
-      // Se não está aberto, abre uma nova janela com a URL correta
-      return clients.openWindow(url);
+      return clients.openWindow(url || BASE_URL);
     })
   );
 });
