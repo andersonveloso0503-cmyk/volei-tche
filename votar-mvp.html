@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"/>
+  <title>Vote no MVP — Volei Tche</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0e1e12;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 40px;
+    }
+    .logo {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: #c9a84c; display: flex; align-items: center;
+      justify-content: center; font-size: 32px; margin-bottom: 8px;
+    }
+    h1 { color: #c9a84c; font-size: 22px; font-weight: 800; text-align: center; }
+    .sub { color: rgba(201,168,76,0.6); font-size: 13px; text-align: center; margin-bottom: 20px; }
+    .card-jogo {
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 14px;
+      padding: 14px 16px;
+      width: 100%; max-width: 440px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .card-jogo .modalidade { color: #c9a84c; font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .card-jogo .detalhes { color: rgba(255,255,255,0.5); font-size: 12px; }
+    .card-jogo .placar { color: #fff; font-size: 28px; font-weight: 800; margin: 8px 0 4px; }
+    .vitoria { color: #6fcf72 !important; }
+    .derrota { color: #e2574b !important; }
+    .empate  { color: #f0c060 !important; }
+
+    h2 { color: #fff; font-size: 16px; font-weight: 700; margin-bottom: 14px; text-align: center; width: 100%; max-width: 440px; }
+
+    .lista-jogadores {
+      width: 100%; max-width: 440px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .jogador-btn {
+      display: flex; align-items: center; gap: 12px;
+      background: #fff;
+      border: 2px solid transparent;
+      border-radius: 14px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: all 0.15s;
+      width: 100%;
+      text-align: left;
+    }
+    .jogador-btn:hover { border-color: #c9a84c; transform: translateY(-1px); }
+    .jogador-btn.selecionado {
+      border-color: #c9a84c;
+      background: linear-gradient(135deg,#fffbee,#fff8e0);
+      box-shadow: 0 4px 16px rgba(201,168,76,0.25);
+    }
+    .avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: #0e1e12; display: flex; align-items: center;
+      justify-content: center; font-size: 18px; font-weight: 700;
+      color: #c9a84c; flex-shrink: 0;
+    }
+    .jogador-nome { font-size: 15px; font-weight: 600; color: #0e1e12; }
+    .check {
+      margin-left: auto; width: 24px; height: 24px; border-radius: 50%;
+      background: #c9a84c; display: flex; align-items: center;
+      justify-content: center; color: #fff; font-size: 14px;
+      flex-shrink: 0; opacity: 0; transition: opacity 0.15s;
+    }
+    .jogador-btn.selecionado .check { opacity: 1; }
+
+    .btn-votar {
+      margin-top: 20px;
+      width: 100%; max-width: 440px;
+      padding: 15px;
+      background: linear-gradient(135deg,#c9a84c,#f0d080);
+      border: none; border-radius: 14px;
+      font-size: 16px; font-weight: 800; color: #0e1e12;
+      cursor: pointer; transition: opacity 0.15s;
+    }
+    .btn-votar:disabled { opacity: 0.4; cursor: default; }
+    .btn-votar:not(:disabled):hover { opacity: 0.9; }
+
+    .loading {
+      color: rgba(201,168,76,0.7); font-size: 14px;
+      text-align: center; margin-top: 40px;
+    }
+    .erro {
+      background: rgba(226,75,74,0.15); border: 1px solid rgba(226,75,74,0.4);
+      border-radius: 12px; padding: 14px; color: #e2574b;
+      font-size: 13px; text-align: center; width: 100%; max-width: 440px;
+      margin-top: 20px;
+    }
+
+    /* TELA DE SUCESSO */
+    .tela-sucesso {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 12px; text-align: center; width: 100%; max-width: 440px;
+      animation: popIn 0.4s ease;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+    .tela-sucesso .trofeu { font-size: 72px; }
+    .tela-sucesso .msg { color: #fff; font-size: 18px; font-weight: 700; }
+    .tela-sucesso .mvp-nome {
+      color: #c9a84c; font-size: 28px; font-weight: 800;
+    }
+    .tela-sucesso .subtxt { color: rgba(255,255,255,0.5); font-size: 13px; }
+
+    /* RANKING */
+    .ranking-card {
+      background: rgba(255,255,255,0.06);
+      border-radius: 14px; padding: 14px 16px;
+      width: 100%; max-width: 440px; margin-top: 10px;
+    }
+    .ranking-titulo { color: #c9a84c; font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+    .rank-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 0;
+      border-bottom: 0.5px solid rgba(255,255,255,0.08);
+    }
+    .rank-item:last-child { border-bottom: none; }
+    .rank-pos { font-size: 18px; width: 28px; text-align: center; flex-shrink: 0; }
+    .rank-info { flex: 1; }
+    .rank-nome { color: #fff; font-size: 14px; font-weight: 600; }
+    .rank-votos { color: rgba(255,255,255,0.45); font-size: 11px; }
+    .rank-bar-wrap { width: 60px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 99px; overflow: hidden; }
+    .rank-bar { height: 100%; background: linear-gradient(90deg,#c9a84c,#f0d080); border-radius: 99px; }
+
+    /* já votou */
+    .ja-votou {
+      background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 12px; padding: 14px; text-align: center;
+      color: rgba(201,168,76,0.8); font-size: 13px;
+      width: 100%; max-width: 440px; margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- cabeçalho sempre visível -->
+  <div class="logo">🏐</div>
+  <h1>Volei Tche</h1>
+  <p class="sub">Votação MVP</p>
+
+  <div id="app"></div>
+
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp }       from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+    import { getFirestore, doc, getDoc, updateDoc, getDocs, collection }
+      from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+    // ── Cole aqui a config do seu Firebase ──────────────────────
+    const firebaseConfig = {
+      apiKey:            "AIzaSyD9f1IiW5oXQLCAtJJbhAFagR0F29c-lGs",
+      authDomain:        "volei-tche.firebaseapp.com",
+      projectId:         "volei-tche",
+      storageBucket:     "volei-tche.appspot.com",
+      messagingSenderId: "1052698437083",
+      appId:             "1:1052698437083:web:0a8c3d3a3b3c3d3e3f3g",
+    };
+    // ────────────────────────────────────────────────────────────
+
+    const app = initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
+
+    const container = document.getElementById('app');
+
+    function mostrar(html) { container.innerHTML = html; }
+
+    // ── Utilitários ─────────────────────────────────────────────
+    const params  = new URLSearchParams(window.location.search);
+    const jogoId  = params.get('jogo');
+    // Chave única por jogo para evitar votos duplos no mesmo dispositivo
+    const chaveVoto = jogoId ? `voto_mvp_${jogoId}` : null;
+
+    // ── 1. Sem ID → mostra ranking geral ────────────────────────
+    async function mostrarRankingGeral() {
+      mostrar('<p class="loading">Carregando ranking…</p>');
+      const snap = await getDocs(collection(db,'jogos'));
+      const jogos = snap.docs.map(d=>({id:d.id,...d.data()})).filter(j=>!j.excluido);
+
+      const ranking = {};
+      jogos.filter(j=>j.placar?.mvp).forEach(j=>{
+        const nome = j.placar.mvp;
+        if (!ranking[nome]) ranking[nome] = { nome, titulos:0 };
+        ranking[nome].titulos++;
+      });
+      // votos diretos (campo votacoesMap)
+      jogos.filter(j=>j.votacoesMap).forEach(j=>{
+        Object.entries(j.votacoesMap).forEach(([nome,votos])=>{
+          if (!ranking[nome]) ranking[nome] = { nome, titulos:0 };
+          ranking[nome].titulos += votos;
+        });
+      });
+
+      const lista = Object.values(ranking).sort((a,b)=>b.titulos-a.titulos);
+      const max   = lista[0]?.titulos || 1;
+
+      if (!lista.length) {
+        mostrar('<p class="loading">Nenhum MVP registrado ainda.</p>');
+        return;
+      }
+
+      const medalhas = ['🥇','🥈','🥉'];
+      container.innerHTML = `
+        <div class="ranking-card">
+          <div class="ranking-titulo">🏆 Hall da Fama — MVPs</div>
+          ${lista.slice(0,10).map((a,i)=>`
+            <div class="rank-item">
+              <div class="rank-pos">${medalhas[i]||`${i+1}º`}</div>
+              <div class="rank-info">
+                <div class="rank-nome">${a.nome}</div>
+                <div class="rank-votos">${a.titulos} título${a.titulos!==1?'s':''}</div>
+              </div>
+              <div class="rank-bar-wrap">
+                <div class="rank-bar" style="width:${Math.round((a.titulos/max)*100)}%"></div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    // ── 2. Com ID → carrega jogo e mostra votação ───────────────
+    async function carregarJogo() {
+      if (!jogoId) { mostrarRankingGeral(); return; }
+
+      mostrar('<p class="loading">Carregando jogo…</p>');
+
+      let jogo;
+      try {
+        const snap = await getDoc(doc(db,'jogos',jogoId));
+        if (!snap.exists()) { mostrar('<p class="erro">Jogo não encontrado.</p>'); return; }
+        jogo = { id: snap.id, ...snap.data() };
+      } catch(e) {
+        mostrar('<p class="erro">Erro ao carregar jogo.<br>'+e.message+'</p>');
+        return;
+      }
+
+      // Verificar se já votou neste dispositivo
+      const jaVotou = localStorage.getItem(chaveVoto);
+
+      // Jogadores que confirmaram presença
+      const confirmados = Object.entries(jogo.confirmacoes||{})
+        .filter(([,v])=>v==='sim')
+        .map(([nome])=>nome);
+
+      if (!confirmados.length) {
+        mostrar('<p class="erro">Nenhum jogador confirmado neste jogo.</p>');
+        return;
+      }
+
+      // Placar
+      const p  = jogo.placar;
+      const resTexto = p?.resultado==='vitoria'
+        ? '🏆 Vitória!' : p?.resultado==='derrota'
+        ? '😤 Derrota'  : p ? '🤝 Empate' : '';
+      const resClasse = p?.resultado||'';
+
+      const placarHtml = p ? `
+        <div class="placar ${resClasse}">${resTexto}</div>
+        <div class="detalhes">${p.nosVencemos||'?'}×${p.elesVenceram||'?'} vs ${p.adversario||'Adversário'}</div>
+      ` : '';
+
+      // Se já tem MVP e já votou → tela sucesso direto
+      if (p?.mvp && jaVotou) {
+        mostrarSucesso(p.mvp, jogo, confirmados);
+        return;
+      }
+
+      // Se já votou mas ainda não tem MVP → aviso
+      if (jaVotou && !p?.mvp) {
+        renderVotacao(jogo, confirmados, placarHtml, true);
+        return;
+      }
+
+      renderVotacao(jogo, confirmados, placarHtml, false);
+    }
+
+    // ── Renderiza a tela de votação ──────────────────────────────
+    function renderVotacao(jogo, confirmados, placarHtml, jaVotouFlag) {
+      const p  = jogo.placar;
+      const dataFmt = jogo.data
+        ? new Date(jogo.data+'T12:00:00').toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'2-digit'})
+        : '';
+
+      container.innerHTML = `
+        <div class="card-jogo">
+          <div class="modalidade">${jogo.modalidade||'Jogo'}</div>
+          <div class="detalhes">${dataFmt}${jogo.hora?' às '+jogo.hora:''} • ${jogo.local||''}</div>
+          ${placarHtml}
+        </div>
+
+        <h2>⭐ Quem foi o MVP do jogo?</h2>
+
+        <div class="lista-jogadores" id="lista"></div>
+
+        ${jaVotouFlag
+          ? `<div class="ja-votou">✅ Você já votou neste jogo! Aguardando o resultado…</div>`
+          : `<button class="btn-votar" id="btnVotar" disabled>Confirmar voto</button>`
+        }
+      `;
+
+      // Preenche lista
+      const lista = document.getElementById('lista');
+      let selecionado = null;
+
+      confirmados.forEach(nome => {
+        const btn = document.createElement('button');
+        btn.className = 'jogador-btn';
+        btn.innerHTML = `
+          <div class="avatar">${nome.charAt(0)}</div>
+          <div class="jogador-nome">${nome}</div>
+          <div class="check">✓</div>
+        `;
+        if (!jaVotouFlag) {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('.jogador-btn').forEach(b => b.classList.remove('selecionado'));
+            btn.classList.add('selecionado');
+            selecionado = nome;
+            document.getElementById('btnVotar').disabled = false;
+          });
+        } else {
+          btn.disabled = true;
+          btn.style.opacity = '0.6';
+          btn.style.cursor = 'default';
+        }
+        lista.appendChild(btn);
+      });
+
+      if (!jaVotouFlag) {
+        document.getElementById('btnVotar').addEventListener('click', () => {
+          if (selecionado) registrarVoto(selecionado, jogo, confirmados);
+        });
+      }
+    }
+
+    // ── Registra o voto no Firestore ─────────────────────────────
+    async function registrarVoto(nome, jogo, confirmados) {
+      const btn = document.getElementById('btnVotar');
+      btn.disabled = true;
+      btn.textContent = 'Registrando…';
+
+      try {
+        const ref = doc(db,'jogos',jogoId);
+        const snap = await getDoc(ref);
+        if (!snap.exists()) throw new Error('Jogo não encontrado');
+
+        const data = snap.data();
+        const votacoes = data.votacoes || {};
+        votacoes[nome] = (votacoes[nome]||0) + 1;
+
+        // Mapa de contagem
+        const votacoesMap = data.votacoesMap || {};
+        votacoesMap[nome] = (votacoesMap[nome]||0) + 1;
+
+        // Determina MVP atual (quem tem mais votos)
+        const lideres = Object.entries(votacoes).sort((a,b)=>b[1]-a[1]);
+        const mvpAtual = lideres[0]?.[0] || nome;
+
+        await updateDoc(ref, { votacoes, votacoesMap, 'placar.mvp': mvpAtual });
+
+        // Salvar que este dispositivo já votou
+        localStorage.setItem(chaveVoto, nome);
+
+        mostrarSucesso(mvpAtual, jogo, confirmados);
+      } catch(e) {
+        btn.disabled = false;
+        btn.textContent = 'Confirmar voto';
+        alert('Erro ao registrar voto: ' + e.message);
+      }
+    }
+
+    // ── Tela de sucesso ──────────────────────────────────────────
+    function mostrarSucesso(mvpNome, jogo, confirmados) {
+      // Buscar votos finais para ranking
+      getDoc(doc(db,'jogos',jogoId)).then(snap => {
+        const data = snap.exists() ? snap.data() : {};
+        const votacoes = data.votacoes || {};
+        const maxVotos = Math.max(...Object.values(votacoes), 1);
+
+        const rankingHtml = Object.entries(votacoes).length ? `
+          <div class="ranking-card" style="margin-top:16px">
+            <div class="ranking-titulo">Resultado da votação</div>
+            ${Object.entries(votacoes)
+              .sort((a,b)=>b[1]-a[1])
+              .map(([nome,v],i)=>`
+                <div class="rank-item">
+                  <div class="rank-pos">${['🥇','🥈','🥉'][i]||`${i+1}º`}</div>
+                  <div class="rank-info">
+                    <div class="rank-nome">${nome}</div>
+                    <div class="rank-votos">${v} voto${v!==1?'s':''}</div>
+                  </div>
+                  <div class="rank-bar-wrap">
+                    <div class="rank-bar" style="width:${Math.round((v/maxVotos)*100)}%"></div>
+                  </div>
+                </div>
+              `).join('')}
+          </div>
+        ` : '';
+
+        container.innerHTML = `
+          <div class="tela-sucesso">
+            <div class="trofeu">🏆</div>
+            <div class="msg">MVP do jogo!</div>
+            <div class="mvp-nome">${mvpNome}</div>
+            <div class="subtxt">${jogo.modalidade||''} • ${jogo.data||''}</div>
+            ${rankingHtml}
+          </div>
+        `;
+      });
+    }
+
+    // ── Iniciar ──────────────────────────────────────────────────
+    carregarJogo();
+  </script>
+</body>
+</html>
